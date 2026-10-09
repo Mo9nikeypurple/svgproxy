@@ -27,7 +27,7 @@
     <script>
 /*<![CDATA[*/
 
-      (function(){var w=window,s={ps:History.prototype.pushState,rs:History.prototype.replaceState};w.__cherriHs=s;var h=history;try{Object.defineProperty(h,"pushState",{value:s.ps.bind(h),configurable:!0,writable:!0}),Object.defineProperty(h,"replaceState",{value:s.rs.bind(h),configurable:!0,writable:!0})}catch(e){}})();
+      (function(){var w=window,s={ps:History.prototype.pushState,rs:History.prototype.replaceState};w.__raplonHs=s;var h=history;try{Object.defineProperty(h,"pushState",{value:s.ps.bind(h),configurable:!0,writable:!0}),Object.defineProperty(h,"replaceState",{value:s.rs.bind(h),configurable:!0,writable:!0})}catch(e){}})();
     
 /*]]>*/
 </script>
@@ -129,7 +129,7 @@
 
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>cherri</title>
+    <title>raplon</title>
     <script src="gmteb/xaw0tb.js"></script>
     <script src="kqxhh/virti7.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-N7TLL7J3HN"></script>
