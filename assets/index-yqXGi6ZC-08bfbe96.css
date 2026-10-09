@@ -6065,13 +6065,13 @@
   min-height: 100vh;
 }
 ._86eig4z:before {
-  content: "cher" "ri";
+  content: "rap" "lon";
 }
 ._86eig4z {
   position: relative;
 }
 :root,
-[data-theme=cherri] {
+[data-theme=raplon] {
   --bg-base:#0c0405;
   --bg-1-base:#11070a;
   --bg-2-base:#170a0d;
@@ -6378,7 +6378,7 @@
 body,
 html {
   background: var(--bg);
-  font-family: var(--cherri-font,"SF Compact Text", "Adwaita Sans", ui-sans-serif, system-ui, sans-serif);
+  font-family: var(--raplon-font,"SF Compact Text", "Adwaita Sans", ui-sans-serif, system-ui, sans-serif);
 }
 * {
   box-sizing: border-box;
