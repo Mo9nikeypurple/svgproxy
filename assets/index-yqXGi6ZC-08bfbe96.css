@@ -6452,57 +6452,49 @@ html {
     opacity: 1;
   }
 }
-/* ========== NO SIDEBAR OVERRIDES ========== */
+/* ========== Hide left sidebar / nav rail ========== */
+/* Targets the narrow vertical icon rail on the left */
 
-/* Hide any left/right fixed or sticky panels that act as sidebars */
 aside,
-[class*="sidebar"],
-[class*="side-bar"],
-[class*="SideBar"],
-[class*="server-list"],
-[class*="channel-list"],
-[class*="nav-panel"],
-.fixed.left-0:not([class*="player"]):not([class*="bar"]):not([class*="modal"]),
-.sticky.left-0 {
+nav[aria-label*="navigation" i],
+nav[aria-label*="sidebar" i],
+[data-sidebar],
+[data-nav-rail],
+[class*="sidebar"]:not([class*="main"]):not([class*="content"]),
+[class*="Sidebar"]:not([class*="main"]):not([class*="content"]),
+[class*="nav-rail"],
+[class*="NavRail"],
+[class*="side-nav"],
+[class*="SideNav"],
+/* Common layout patterns for icon-only left rails */
+.fixed.left-0.flex.flex-col.h-screen,
+.fixed.left-0.flex.flex-col.h-full,
+.sticky.left-0.flex.flex-col.h-screen,
+div.fixed.left-0[class*="w-"],
+/* Fallback: first major vertical flex column that is narrow */
+body > div > div:first-child.flex.flex-col,
+#_xi9j4u0 > div:first-child.flex.flex-col {
   display: none !important;
   width: 0 !important;
   min-width: 0 !important;
   max-width: 0 !important;
   overflow: hidden !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
   pointer-events: none !important;
-  opacity: 0 !important;
 }
 
-/* Force main content / layout containers to take full width */
-.flex > .flex-1,
-.grid > .flex-1,
-main,
-[class*="main-content"],
-[class*="content-area"],
-[class*="chat-area"],
-[class*="view-area"] {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  flex: 1 1 100% !important;
-}
-
-/* Remove any left padding/margin that was reserved for a sidebar */
+/* Let the main content expand to full width */
 body,
 #_xi9j4u0,
-.glass-shell {
-  padding-left: 0 !important;
+main,
+[class*="main-content"],
+[class*="MainContent"],
+[class*="content-area"],
+.flex-1 {
   margin-left: 0 !important;
-}
-
-/* Optional: collapse common fixed-width sidebar sizes */
-.w-\[220px\],
-.w-\[360px\],
-.w-64,
-.w-72,
-.w-80,
-.w-\[20rem\],
-.w-\[26rem\] {
-  width: 0 !important;
-  min-width: 0 !important;
+  padding-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
