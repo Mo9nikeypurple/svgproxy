@@ -6452,57 +6452,96 @@ html {
     opacity: 1;
   }
 }
-/* ========== NO SIDEBAR OVERRIDES ========== */
 
-/* Hide any left/right fixed or sticky panels that act as sidebars */
+/* ========== NO SIDEBAR OVERRIDES (aggressive) ========== */
+
+/* Force root layout to full width single column */
+#_xi9j4u0,
+.glass-shell,
+body,
+html {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Hide any element that is positioned on the left and looks like a sidebar */
+.fixed.left-0,
+.sticky.left-0,
+.absolute.left-0,
 aside,
+nav,
 [class*="sidebar"],
 [class*="side-bar"],
 [class*="SideBar"],
-[class*="server-list"],
+[class*="server"],
 [class*="channel-list"],
 [class*="nav-panel"],
-.fixed.left-0:not([class*="player"]):not([class*="bar"]):not([class*="modal"]),
-.sticky.left-0 {
+[class*="left-panel"],
+[class*="left-nav"],
+[class*="sidebar-"] {
   display: none !important;
+  visibility: hidden !important;
   width: 0 !important;
   min-width: 0 !important;
   max-width: 0 !important;
+  flex: 0 0 0 !important;
   overflow: hidden !important;
-  pointer-events: none !important;
   opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
 }
 
-/* Force main content / layout containers to take full width */
-.flex > .flex-1,
-.grid > .flex-1,
-main,
-[class*="main-content"],
-[class*="content-area"],
-[class*="chat-area"],
-[class*="view-area"] {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  flex: 1 1 100% !important;
-}
-
-/* Remove any left padding/margin that was reserved for a sidebar */
-body,
-#_xi9j4u0,
-.glass-shell {
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-}
-
-/* Optional: collapse common fixed-width sidebar sizes */
+/* Collapse common fixed sidebar widths used in this stylesheet */
 .w-\[220px\],
 .w-\[360px\],
+.w-\[20rem\],
+.w-\[26rem\],
 .w-64,
 .w-72,
 .w-80,
-.w-\[20rem\],
-.w-\[26rem\] {
+.w-\[170px\],
+.min-w-\[170px\],
+.min-w-20,
+.min-w-25,
+.min-w-40,
+.min-w-48 {
   width: 0 !important;
   min-width: 0 !important;
+  max-width: 0 !important;
+  flex-basis: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Force every direct flex/grid child that isn't the main content to collapse */
+.flex > *:first-child:not(main):not([class*="content"]):not([class*="main"]):not([class*="player"]):not([class*="bar"]),
+.grid > *:first-child:not(main):not([class*="content"]):not([class*="main"]):not([class*="player"]):not([class*="bar"]) {
+  display: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  flex: 0 0 0 !important;
+}
+
+/* Make remaining content take the entire width */
+.flex,
+.grid,
+main,
+[class*="main"],
+[class*="content"],
+[class*="view"],
+[class*="chat"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  flex: 1 1 100% !important;
+}
+
+/* Kill narrow grid tracks that are typical for icon sidebars */
+.grid-cols-\[20px_1fr\],
+.grid-cols-\[2rem_1fr_auto\],
+.grid-cols-\[2rem_auto_1fr_auto\] {
+  grid-template-columns: 1fr !important;
 }
