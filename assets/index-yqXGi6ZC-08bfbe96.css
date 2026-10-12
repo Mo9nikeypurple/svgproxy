@@ -6452,28 +6452,28 @@ html {
     opacity: 1;
   }
 }
-/* ========== Hide left sidebar / nav rail ========== */
-/* Targets the narrow vertical icon rail on the left */
+/* ========== Hide left sidebar using the provided class ========== */
 
-aside,
-nav[aria-label*="navigation" i],
-nav[aria-label*="sidebar" i],
-[data-sidebar],
-[data-nav-rail],
-[class*="sidebar"]:not([class*="main"]):not([class*="content"]),
-[class*="Sidebar"]:not([class*="main"]):not([class*="content"]),
-[class*="nav-rail"],
-[class*="NavRail"],
-[class*="side-nav"],
-[class*="SideNav"],
-/* Common layout patterns for icon-only left rails */
-.fixed.left-0.flex.flex-col.h-screen,
-.fixed.left-0.flex.flex-col.h-full,
-.sticky.left-0.flex.flex-col.h-screen,
-div.fixed.left-0[class*="w-"],
-/* Fallback: first major vertical flex column that is narrow */
-body > div > div:first-child.flex.flex-col,
-#_xi9j4u0 > div:first-child.flex.flex-col {
+/* The icon container itself */
+.flex.flex-col.items-center.gap-0\.5.flex-1 {
+  display: none !important;
+}
+
+/* Also hide common parent wrappers of this icon rail so the space collapses */
+.flex.flex-col.items-center.gap-0\.5.flex-1,
+.flex.flex-col.items-center.gap-0\.5.flex-1 * {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide any direct parent that is a narrow vertical column */
+div:has(> .flex.flex-col.items-center.gap-0\.5.flex-1),
+aside:has(.flex.flex-col.items-center.gap-0\.5.flex-1),
+nav:has(.flex.flex-col.items-center.gap-0\.5.flex-1) {
   display: none !important;
   width: 0 !important;
   min-width: 0 !important;
@@ -6482,19 +6482,10 @@ body > div > div:first-child.flex.flex-col,
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  pointer-events: none !important;
 }
 
-/* Let the main content expand to full width */
-body,
-#_xi9j4u0,
-main,
-[class*="main-content"],
-[class*="MainContent"],
-[class*="content-area"],
-.flex-1 {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
+/* Make sure the rest of the layout expands */
+body, #_xi9j4u0, main {
   width: 100% !important;
   max-width: 100% !important;
 }
