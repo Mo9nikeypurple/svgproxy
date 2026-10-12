@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>raplon</title>
+  <!-- base only for relative asset resolution inside the app when needed;
+       SW must stay same-origin (GitHub Pages), not jsDelivr -->
+  <base href="https://cdn.jsdelivr.net/gh/Mo9nikeypurple/svgproxy@main/" />
+  <link rel="icon" type="image/svg+xml" href="https://cdn.jsdelivr.net/gh/Mo9nikeypurple/svgproxy@main/favicon.svg" />
+
+  <script>
+    // History patch (upstream)
+    (function () {
+      var w = window, s = { ps: History.prototype.pushState, rs: History.prototype.replaceState };
+      w.__raplonHs = s;
+      w.__cherriHs = s;
+      var h = history;
+      try {
+        Object.defineProperty(h, "pushState", { value: s.ps.bind(h), configurable: true, writable: true });
+        Object.defineProperty(h, "replaceState", { value: s.rs.bind(h), configurable: true, writable: true });
+      } catch (e) {}
+    })();
+  </script>
+
+  <script>
+    // Register the SAME-ORIGIN service worker (required for the proxy).
+    // On GitHub Pages this must be the file in THIS repo, e.g. ./4mkcjl.js
+    // — never a cross-origin CDN URL (browsers block that).
+    (function () {
+      // Resolve SW against the page origin, not <base href>
+      var swUrl = new URL("4mkcjl.js", location.href).href;
+      // If page is .../singlefile.html, SW is still .../4mkcjl.js next to it
+      // Prefer repo-root SW when under /svgproxy/
+      try {
+        var path = location.pathname;
+        if (path.endsWith(".html")) {
+          swUrl = new URL("4mkcjl.js", location.href.replace(/[^/]+$/, "")).href;
+        }
+      } catch (e) {}
+
+      window.__SW_FILE__ = swUrl;
+      window.__swRegistration = navigator.serviceWorker
+        ? (function () {
+            var FILE = (window.__SW_FILE__ || "").split("/").pop();
+            var baseName = function (u) {
+              try { return new URL(u, location.href).pathname.split("/").pop(); }
+              catch (e) { return String(u); }
+            };
+            var scope = new URL(".", new URL(window.__SW_FILE__, location.href)).href;
+            // Drop stale workers from other builds/paths only
+            navigator.serviceWorker.getRegistrations().then(function (regs) {
+              regs.forEach(function (r) {
+                var w = r.active || r.waiting || r.installing;
+                if (r.scope !== scope && w && baseName(w.scriptURL) !== FILE) r.unregister();
+              });
+            }).catch(function () {});
+
+            return navigator.serviceWorker
+              .register(window.__SW_FILE__, { updateViaCache: "all", scope: scope })
+              .then(function (reg) {
+                function currentControls() {
+                  var c = navigator.serviceWorker.controller;
+                  return !!c && baseName(c.scriptURL) === FILE;
+                }
+                if (currentControls()) {
+                  sessionStorage.removeItem("__sw_reload");
+                  return reg;
+                }
+                if (sessionStorage.getItem("__sw_reload")) return reg;
+                navigator.serviceWorker.ready.then(function () {
+                  if (currentControls()) return;
+                  var settled = false;
+                  var onCtrl = function () {
+                    if (!currentControls()) return;
+                    settled = true;
+                    navigator.serviceWorker.removeEventListener("controllerchange", onCtrl);
+                  };
+                  navigator.serviceWorker.addEventListener("controllerchange", onCtrl);
+                  setTimeout(function () {
+                    navigator.serviceWorker.removeEventListener("controllerchange", onCtrl);
+                    if (!settled && !currentControls()) {
+                      sessionStorage.setItem("__sw_reload", "1");
+                      location.reload();
+                    }
+                  }, 1500);
+                });
+                return reg;
+              })
+              .catch(function (err) {
+                console.error("[sw] registration failed:", err);
+                console.error("[sw] The proxy needs 4mkcjl.js on the SAME origin as this page.");
+                console.error("[sw] Expected SW URL:", swUrl);
+                return null;
+              });
+          })()
+        : Promise.resolve(null);
+    })();
+  </script>
+
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/Mo9nikeypurple/svgproxy@main/assets/index-yqXGi6ZC-08bfbe96.css" />
+  <script src="https://cdn.jsdelivr.net/gh/Mo9nikeypurple/svgproxy@main/gmteb/xaw0tb.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/Mo9nikeypurple/svgproxy@main/kqxhh/virti7.js"></script>
+</head>
+<body>
+  <div id="_xi9j4u0"></div>
+  <script src="https://cdn.jsdelivr.net/gh/Mo9nikeypurple/svgproxy@main/assets/bundle-zvx8twxc.js"></script>
+</body>
+</html>
